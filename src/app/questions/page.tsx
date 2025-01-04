@@ -36,14 +36,16 @@ interface ApiResponse {
 
 // Função para buscar mensagens no lado do servidor
 async function fetchMessages(token: string): Promise<ApiResponse> {
-  console.log(token)
-  const response = await axios.get('http://localhost:3000/question', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  
-  return response.data;
+  try {
+    const response = await axios.get('http://localhost:3000/question', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });  
+    return response.data;
+  } catch (error) {
+    throw new Error('Error:' + error);
+  }
 }
 
 export default async function QuestionsPage() {
