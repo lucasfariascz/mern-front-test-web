@@ -2,21 +2,17 @@ FROM node:20.18.1
 
 WORKDIR /app
 
-# Copia os arquivos de configuração
+# Copia apenas os arquivos de configuração primeiro
 COPY package*.json ./
-COPY next.config.js ./
-COPY tsconfig.json ./
 
 # Instala as dependências
 RUN npm install
 
-# Copia o resto do código
+# Agora copia o resto do código (ignorando node_modules por causa do .dockerignore)
 COPY . .
 
-# Configura a porta
+# Configura e expõe a porta
 ENV PORT 3333
-
-# Expõe a porta
 EXPOSE 3333
 
 # Em desenvolvimento

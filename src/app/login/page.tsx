@@ -29,7 +29,6 @@ export default function LoginPage() {
         email,
         password,
       });
-      console.log('r: ', response)
       Cookies.set('token', response.data.message.token); // Armazena o token em cookies
       router.push('/home'); // Redireciona após login
     } catch (err) {
